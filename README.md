@@ -27,5 +27,17 @@ docker run \
 image-name
 ```
 every **file** in /data folder will be encrypted and uploaded to S3 bucket and if option 
+
 `AUTO_REMOVE` if set to true files will be removed after upload 
+
 `DELETE_AFTER` option will set `X-Delete-After` header which allows to automatically remove old backups from bucket.
+
+When `CRON` variable is not specified backup will not execute automatically, you can do it manualy by executing ./backup.sh file inside container or using external scheduler like [mcuadros/ofelia](https://github.com/mcuadros/ofelia) by adding labels:
+```
+--label ofelia.enabled=true \
+--label ofelia.job-local.my-test-job.schedule="@every 12h" \
+--label ofelia.job-local.my-test-job.command="sh -c './backup.sh'" \
+ ```
+
+## Project inspired by
+[grahovam/docker-backup-gpg-s3](https://github.com/grahovam/docker-backup-gpg-s3)
