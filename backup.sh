@@ -11,7 +11,9 @@ for FILE in $FILES
 do
     gpg --trust-model always --encrypt $RECIPIENTS --output $FILE.gpg $FILE
     swift upload -H "X-Delete-After: ${DELETE_AFTER}" $BUCKET $FILE.gpg
-    rm $FILE
     rm $FILE.gpg
+    if $AUTO_REMOVE; then
+        rm $FILE
+    fi
 done
 
