@@ -1,21 +1,20 @@
 FROM alpine:3.12
 
-RUN apk add --update \
+RUN apk add --update --no-cache\
     py3-pip \
     py3-netifaces \
     python3-dev \
     musl-dev \
     gcc \
     gpgme \
-    xz 
-
-RUN apk add \
+    xz  \
     build-base \
     libffi-dev \
     openssl-dev \ 
     krb5-dev \
     linux-headers \
     zeromq-dev
+
 
 RUN rm -rf /var/cache/apk/*
 
