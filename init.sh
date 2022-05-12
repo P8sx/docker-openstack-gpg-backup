@@ -9,5 +9,5 @@ then
     echo "$CRON_INTERVAL /backup.sh" >> /backup.cron
     crontab /backup.cron
 fi
-./backup.sh
-# tail -f /dev/null
+
+tail -f /dev/null
