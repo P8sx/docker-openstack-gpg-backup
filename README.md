@@ -23,14 +23,18 @@ docker run \
 --env "CRON=0 1 * * *" \
 --env "DELETE_AFTER=120"  \
 --env "BUCKET=bucket" \ 
---env "AUTO_REMOVE=true" \ 
+--env "REMOVE_BASE_FILE=true" \ 
+--env "COMPRESS_FILE=true" \
 image-name
 ```
 every **file** in /data folder will be encrypted and uploaded to S3 bucket and if option 
 
-`AUTO_REMOVE` if set to true files will be removed after upload 
+`REMOVE_BASE_FILE` if set to true files will be removed after upload 
 
-`DELETE_AFTER` option will set `X-Delete-After` header which allows to automatically remove old backups from bucket.
+`DELETE_AFTER` option will set `X-Delete-After` header which allows to automatically remove old backups from bucket. If not specified header will not be included.
+
+`COMPRESS_FILE` option will also compress file
+
 
 When `CRON` variable is not specified backup will not execute automatically, you can do it manualy by executing ./backup.sh file inside container or using external scheduler like [mcuadros/ofelia](https://github.com/mcuadros/ofelia) by adding labels:
 ```
